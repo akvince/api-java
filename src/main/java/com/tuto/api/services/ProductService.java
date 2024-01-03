@@ -5,6 +5,8 @@ import com.tuto.api.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -53,6 +55,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public boolean deleteProduct(UUID uuid) {
         try {
             productRepository.deleteByUuid(uuid);
