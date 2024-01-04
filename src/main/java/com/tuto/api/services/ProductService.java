@@ -48,6 +48,10 @@ public class ProductService {
                 existingProduct.setPrice(partialProduct.getPrice());
             }
 
+            if (partialProduct.getBrand() != null) {
+                existingProduct.setBrand(partialProduct.getBrand());
+            }
+
             ProductEntity updatedProduct = productRepository.save(existingProduct);
             return Optional.of(updatedProduct);
         } else {

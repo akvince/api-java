@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "product")
-public class ProductEntity {
-
+@Table(name = "brand")
+public class BrandEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
     @Type(type = "uuid-char")
@@ -19,16 +20,11 @@ public class ProductEntity {
 
     private String name;
 
-    private Double price;
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<ProductEntity> products = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "brand_uuid", nullable = true)
-    @JsonManagedReference
-    private BrandEntity brand;
-
-    // Ajoutez d'autres champs et méthodes selon vos besoins
-
-    public ProductEntity() {
+    public BrandEntity() {
         this.uuid = UUID.randomUUID();
     }
 
@@ -44,19 +40,11 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
+    public List<ProductEntity> getProducts() {
+        return products;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public BrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandEntity brand) {
-        this.brand = brand;
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
     }
 }
