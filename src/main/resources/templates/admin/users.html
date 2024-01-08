@@ -5,31 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Users</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin/admin.css">
+
 </head>
 <body>
 <h1>Admin Users Page</h1>
 
 <!-- Form to create a new user -->
-<form action="/user/create-user" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+<div class="admin">
+    <form action="/user/create-user" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-    <!-- Select for choosing a role -->
-    <label for="role">Role:</label>
-    <select id="role" name="role" required>
-        <option value="USER">User</option>
-        <option value="ADMIN">Admin</option>
-        <!-- Add more roles as needed -->
-    </select>
+        <!-- Select for choosing a role -->
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+            <!-- Add more roles as needed -->
+        </select>
 
-    <!-- Ajoutez ceci dans votre formulaire -->
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <!-- Ajoutez ceci dans votre formulaire -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-    <button type="submit">Create User</button>
-</form>
+        <button type="submit">Create User</button>
+    </form>
+</div>
 
 <!-- Display existing users if needed -->
 </body>
