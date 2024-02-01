@@ -10,8 +10,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "product")
 public class ProductEntity {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid2")
     @Type(type = "uuid-char")
     @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
@@ -23,11 +25,9 @@ public class ProductEntity {
 
     @ManyToOne
     @JoinColumn(name = "brand_uuid", nullable = true)
-    @JsonManagedReference
     private BrandEntity brand;
 
     // Ajoutez d'autres champs et méthodes selon vos besoins
-
     public ProductEntity() {
         this.uuid = UUID.randomUUID();
     }
@@ -58,5 +58,13 @@ public class ProductEntity {
 
     public void setBrand(BrandEntity brand) {
         this.brand = brand;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

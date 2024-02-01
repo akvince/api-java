@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="/css/admin/admin.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Products</title>
+</head>
+    <body>
+
+        <h2>Admin Products</h2>
+
+        <form method="post" th:action="@{/admin/products/{uuid}/edit(uuid=${product.uuid})}" th:object="${product}">
+            <div>
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" th:value="${product.name}" />
+            </div>
+            <div>
+                <label for="price">Product Price:</label>
+                <input type="text" id="price" name="price" th:value="${product.price}" />
+            </div>
+            <div>
+                <label for="brand">Product Brand:</label>
+                <select id="brand" name="brand">
+                    <option th:each="brand : ${brands}"
+                            th:value="${brand.uuid}"
+                            th:text="${brand.name}"
+                            th:selected="${brand.uuid eq product.brand?.uuid}"></option>
+                </select>
+            </div>
+            <!-- Add other fields as needed -->
+
+            <button type="submit">Update Product</button>
+        </form>
+
+
+        <!-- Ajoutez des formulaires ou d'autres éléments pour modifier les produits -->
+
+    </body>
+</html>

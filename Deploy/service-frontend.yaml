@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: api-java
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-java-front
+  template:
+    metadata:
+      labels:
+        app: api-java-front
+    spec:
+      containers:
+        - name: api-java-front
+          image: react_api:tag
+          ports:
+            - containerPort: 3001

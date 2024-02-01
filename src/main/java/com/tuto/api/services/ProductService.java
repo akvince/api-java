@@ -34,6 +34,7 @@ public class ProductService {
     }
 
     public Optional<ProductEntity> patchProduct(UUID uuid, ProductEntity partialProduct) {
+
         Optional<ProductEntity> existingProductOptional = getByUuid(uuid);
 
         if (existingProductOptional.isPresent()) {

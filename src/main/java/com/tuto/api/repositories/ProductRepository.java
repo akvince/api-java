@@ -11,4 +11,3 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
     void deleteByUuid(UUID uuid);
 }
-

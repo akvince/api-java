@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="css/admin/admin.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Products</title>
+</head>
+<body>
+
+<h2>Admin Products</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Product uuid</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Product Brand</th>
+        <th>Edit</th>
+        <!-- Ajoutez d'autres en-têtes selon vos besoins -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${product.uuid}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.brand.name}"></td>
+        <td>
+            <!-- Add a link to the edit page using the product's UUID -->
+            <a th:href="@{/admin/products/{uuid}/edit(uuid=${product.uuid})}">Editer</a>
+        </td>
+        <td>
+            <!-- Add a link to the edit page using the product's UUID -->
+            <a th:href="@{/admin/products/{uuid}/delete(uuid=${product.uuid})}">Delete</a>
+        </td>
+        <!-- Ajoutez d'autres colonnes selon vos besoins -->
+    </tr>
+    </tbody>
+</table>
+
+<!-- Ajoutez des formulaires ou d'autres éléments pour modifier les produits -->
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: 'mysql/mysql-server:5.7'
+    environment:
+      - MYSQL_DATABASE=springboot_docker
+      - MYSQL_USER=springboot_docker
+      - MYSQL_PASSWORD=springboot_docker
+      - MYSQL_ROOT_PASSWORD=springboot_docker
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - '33061:3306'
+    networks:
+      - api-spring
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8089:80
+    networks:
+      - api-spring
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8080"
+    networks:
+      - api-spring
+
+  react-app:
+    build:
+      context: .
+      dockerfile: ./DockerfileFront
+    ports:
+      - "3001:3000"
+    networks:
+      - api-spring
+
+networks:
+  api-spring:
+volumes:
+  mysql_data:
